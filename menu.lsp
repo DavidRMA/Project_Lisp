@@ -37,7 +37,8 @@
 		)
 
         (4
-            ;funcion...
+			(if (= numRegisterTournaments 0) (print "No se pueden registrar boxeadores sin torneos")
+            (searchBoxerByTournament)) ;invocar funcion para buscar un boxeador por torneo
         )
 		(5
             ;funcion...

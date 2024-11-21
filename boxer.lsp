@@ -56,3 +56,9 @@
         boxer
     )    
 )
+(defun printBoxer (boxer)
+    (format t "~%Codigo: ~D" (Boxer-code boxer))
+    (format t "~%Nombre: ~A" (Boxer-firstname boxer))
+    (format t "~%Apellido: ~A" (Boxer-lastname boxer))
+    (format t "~%Tipo de peso: ~A" (Boxer-typeWeight boxer))
+)
