@@ -3,9 +3,9 @@
 ;Jonathan Guejia Burbano <jonathanguejia@unicauca.edu.co>
 
 ;Archivos a cargar
-(load "load.lsp")
-(load "registerTournament.lsp")
 
+(load "tournament.lsp")
+(load "boxer.lsp")
 
 
 (loop
@@ -15,10 +15,11 @@
 	(print " ===========================================")
 	(format t" ~%") 
 	(print "   1.   Registrar Torneo de Boxeo")
-	(print "   2.   Buscar Torneo de Boxeo por codigo")
-	(print "   3.   Buscar un Boxeador especifico para un torneo de boxeo especifico")
-    (print "   4.   Consultar el numero de Boxeadores que tienen tipo peso MOSCA para un Torneo de Boxeo especifico")
-    (print "   5.   Salir.")
+	(print "   2.   Registrar Boxeador")
+	(print "   3.   Buscar un Torneo por codigo")
+    (print "   4.   Buscar un Boxeador por Torneo especifico")
+    (print "   5.   Consultar numero de Boxeadores MOSCA en un Torneo espefico.")
+	(print "   6.   Salir.")
 	(format t" ~%")
 	(print "   Digite la opcion:")
       (setq opcion (read))	
@@ -27,7 +28,8 @@
             (registerTournament) ;invocar funcion para registar un torneo
         )
 		(2 
-            ;funcion...
+            (if (= numRegisterTournaments 0) (print "No se pueden registrar boxeadores sin torneos")
+			(registerBoxer)) ;invocar funcion para registar un boxeador
 		)	
 	
 		(3  
@@ -37,8 +39,15 @@
         (4
             ;funcion...
         )
-
-	    (otherwise nil)
+		(5
+            ;funcion...
+        )
+		(6
+            
+        )
+	    (otherwise 
+			(print "Opcion no valida, intente de nuevo")
+		)
 	)
-	(when (eq opcion 5) (print "fin programa")(return))
+	(when (eq opcion 6) (print "Fin del programa, muchas gracias")(return))
   )
