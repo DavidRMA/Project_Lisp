@@ -6,7 +6,6 @@
 
 (load "tournament.lsp")
 (load "boxer.lsp")
-(load "searchBoxingT.lsp")
 
 (loop
       
