@@ -1,7 +1,7 @@
 ;Integrantes:
 ;David Chacón Morán <jhoanchacon@unicauca.edu.co>
 ;Jonathan Guejia Burbano <jonathanguejia@unicauca.edu.co>
-(load "tournament.lsp")
+
 (defstruct Boxer
     code
     firstname
@@ -17,10 +17,9 @@
     )
 )
 (defun registerBoxer()
-    (printTournaments)
-    (print "Ingrese el codigo del torneo al que desea registrar el boxeador:")
-    (setq codeTournament (read))
-    (setq indexTournament (findTournament codeTournament))
+    (printTournaments)    
+    (setq codeTournament (readNumber "Ingrese el codigo del torneo al que desea registrar el boxeador:"))    
+    (setq indexTournament (findTournament codeTournament))    
     (if (= indexTournament -1)
         (print "El torneo no existe")
         (progn
@@ -42,15 +41,13 @@
     )
 )
 (defun readBoxer()
-    (print "Ingrese los datos del boxeador")    
-    (print "Codigo del boxeador: ")
-    (setq codeBox (read))
+    (print "Ingrese los datos del boxeador")        
+    (setq codeBox (readBoxerCode))
     (print "Nombre del boxeador: ")
     (setq nameBox (read))
     (print "Apellido del boxeador: ")
-    (setq lastnameBox (read))    
-    (print "Tipo de peso del boxeador: ")
-    (setq typeWeightBox (read))     
+    (setq lastnameBox (read))        
+    (setq typeWeightBox (readTypeWeightBoxer "Tipo de peso del boxeador: "))     
     (let 
         ((boxer (make-Boxer :code codeBox :firstname nameBox :lastname lastnameBox :typeWeight typeWeightBox)))                
         boxer
@@ -61,4 +58,27 @@
     (format t "~%Nombre: ~A" (Boxer-firstname boxer))
     (format t "~%Apellido: ~A" (Boxer-lastname boxer))
     (format t "~%Tipo de peso: ~A" (Boxer-typeWeight boxer))
+)
+(defun readBoxerCode()
+    (loop
+        (let
+            ((codeBox (readNumber "Codigo del boxeador: ")))
+            (when (= (findBoxer codeBox) -1)(return codeBox)) ;Si el boxeador no existe, se retorna el codigo
+        )
+        (print "El boxeador ya existe, intente con otro codigo")
+    )    
+)
+(defun findBoxer(code)
+    (setq index -1)
+    ;Si no existen boxeadores registrados en el torneo, se retorna -1
+    (if (= (TournamentBox-numRegisterBoxers (aref tournaments indexTournament)) 0)(return-from findBoxer index))
+    (setq i 0)    
+    (loop
+        (setq boxer (aref (TournamentBox-boxers (aref tournaments indexTournament)) i))        
+        (if (= code (Boxer-code boxer))
+            (setq index i);Se encontro el boxeador
+        )
+        (setq i (+ i 1))
+        (when (or (= i (TournamentBox-numRegisterBoxers (aref tournaments indexTournament))) (/= index -1))(return index))
+    )    
 )

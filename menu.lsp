@@ -6,6 +6,7 @@
 
 (load "tournament.lsp")
 (load "boxer.lsp")
+(load "validations.lsp")
 
 (loop
       
@@ -20,8 +21,7 @@
     (print "   5.   Consultar numero de Boxeadores MOSCA en un Torneo espefico.")
 	(print "   6.   Salir.")
 	(format t" ~%")
-	(print "   Digite la opcion:")
-      (setq opcion (read))	
+    (setq opcion (readNumber "   Digite la opcion:"))	
   	(case opcion
 		(1 
             (registerTournament) ;invocar funcion para registar un torneo

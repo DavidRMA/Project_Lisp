@@ -31,17 +31,15 @@
     (progn 
         (format t "Registre el torneo de boxeo ~%")
         (setq tournament (createTournament))    
-        ;Llenar datos del torneo
-        (print "Codigo del torneo de boxeo:")
-        (setq code (read))
+        ;Llenar datos del torneo        
+        (setq code (readTournamentCode))
         (setf (TournamentBox-code tournament) code)
 
         (print "Nombre del torneo de boxeo:")
         (setq nameTor (read))
         (setf (TournamentBox-name tournament) nameTor)
 
-        (print "Modalidad del torneo de boxeo:")
-        (setq mode (read))
+        (setq mode (readModalityTournament "Modalidad del torneo de boxeo:"))
         (setf (TournamentBox-mode tournament) mode)
 
         ;Almacenar torneo en el vector
@@ -54,6 +52,15 @@
     )
     )
     
+)
+(defun readTournamentCode()
+    (loop        
+        (let            
+            ((code (readNumber "Codigo del torneo de boxeo: ")))        
+            (when (= (findTournament code) -1)(return code))                        
+        )
+        (print "El torneo ya existe, ingrese otro codigo")
+    )        
 )
 (defun printTournaments()
     (print "Torneos registrados:")
@@ -69,19 +76,19 @@
 )
 (defun findTournament(code)
     (setq index -1)
+    (if (= numRegisterTournaments 0)(return-from findTournament index))
     (setq i 0)
-    (loop 
+    (loop         
         (if (= code (TournamentBox-code (aref tournaments i)))
             (setq index i);Se encontro el torneo
         )
         (setq i (+ i 1))
-        (when (or (= i numRegisterTournaments 1) (/= index -1))(return index))
+        (when (or (= i numRegisterTournaments) (/= index -1))(return index))
     )    
 )
 (defun searchBoxerByTournament()
-    (printTournaments)
-    (print "Ingrese el codigo del torneo al que desea buscar el boxeador:")
-    (setq codeTournament (read))
+    (printTournaments)    
+    (setq codeTournament (readNumber "Ingrese el codigo del torneo al que desea buscar el boxeador:"))
     (setq indexTournament (findTournament codeTournament))
     (if (= indexTournament -1)
         (print "El torneo no existe")
@@ -92,9 +99,8 @@
             (if(= (TournamentBox-numRegisterBoxers tournament) 0)
                 (print "No hay boxeadores registrados en este torneo")
                 (progn
-                    (printBoxersByTournament tournament)
-                    (print "Ingrese el codigo del boxeador que desea buscar:")
-                    (setq codeBoxer (read))
+                    (printBoxersByTournament tournament)                    
+                    (setq codeBoxer (readNumber "Ingrese el codigo del boxeador que desea buscar:"))
                     (setq indexBoxer (findBoxer codeBoxer tournament))
                     (if (= indexBoxer -1)
                         (print "El boxeador no existe en este torneo")
@@ -160,10 +166,7 @@
     (setq i 0)
     (loop
         (format t "~%Boxeador ~D" (+ i 1))
-        (format t "~%Codigo: ~D" (Boxer-code (aref (TournamentBox-boxers tournament) i)))
-        (format t "~%Nombre: ~A" (Boxer-firstname (aref (TournamentBox-boxers tournament) i)))
-        (format t "~%Apellido: ~A" (Boxer-lastname (aref (TournamentBox-boxers tournament) i)))  
-        (format t "~%Tipo de peso: ~A" (Boxer-typeWeight (aref (TournamentBox-boxers tournament) i)))            
+        (printBoxer (aref (TournamentBox-boxers tournament) i))
         (setq i (+ i 1))
         (when (= i (TournamentBox-numRegisterBoxers tournament))(return))
     )
@@ -171,9 +174,8 @@
 
 (defun searchBoxingTournament()
     ;Mostramos los torneos que se han registrado
-    (showRegisteredTournaments)
-    (print "Ingrese el codigo del torneo para mostrar sus datos:")
-    (setq codeTournament (read))
+    (showRegisteredTournaments)    
+    (setq codeTournament (readNumber "Ingrese el codigo del torneo para mostrar sus datos:"))
     (setq indexTournament (findTournament codeTournament))
     (if (= indexTournament -1)
         (print "El torneo no existe")
@@ -188,9 +190,8 @@
 ;Funcion para contar los boxeadores con peso MOSCA en un torneo especifico
 (defun numBoxersMosca()
     ;Mostramos los torneos que se han registrado
-    (showRegisteredTournaments)
-    (print "Ingrese el codigo del torneo:")
-    (setq codeTournament (read))
+    (showRegisteredTournaments)    
+    (setq codeTournament (readNumber "Ingrese el codigo del torneo:"))
     (setq indexTournament (findTournament codeTournament))
     (if (= indexTournament -1)
         (print "El torneo no existe")
