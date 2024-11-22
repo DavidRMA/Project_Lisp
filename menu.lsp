@@ -6,7 +6,7 @@
 
 (load "tournament.lsp")
 (load "boxer.lsp")
-
+(load "searchBoxingT.lsp")
 
 (loop
       
@@ -33,7 +33,8 @@
 		)	
 	
 		(3  
-            ;funcion...		   
+			(if (= numRegisterTournaments 0) (print "No hay torneos de boxeo registrados")
+            (searchBoxingTournament)) ;incovar funcion para buscar un torneo por codigo	   
 		)
 
         (4
