@@ -41,7 +41,8 @@
             (searchBoxerByTournament)) ;invocar funcion para buscar un boxeador por torneo
         )
 		(5
-            ;funcion...
+            (if (= numRegisterTournaments 0) (print "No hay torneos de boxeo registrados")
+			(numBoxersMosca))
         )
 		(6
             

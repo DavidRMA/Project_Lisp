@@ -185,3 +185,33 @@
         )
     )       
 )
+;Funcion para contar los boxeadores con peso MOSCA en un torneo especifico
+(defun numBoxersMosca()
+    ;Mostramos los torneos que se han registrado
+    (showRegisteredTournaments)
+    (print "Ingrese el codigo del torneo:")
+    (setq codeTournament (read))
+    (setq indexTournament (findTournament codeTournament))
+    (if (= indexTournament -1)
+        (print "El torneo no existe")
+        (progn
+            ;Se obtiene el torneo
+            (setq tournament (aref tournaments indexTournament))
+            (if(= (TournamentBox-numRegisterBoxers tournament) 0)
+                (print "Aun no hay boxeadores registrados en este torneo")
+                (progn
+                    (setq i 0)
+                    (setq cont 0)
+                    (loop 
+                        (if (eq 'MOSCA (Boxer-typeWeight (aref (TournamentBox-boxers tournament) i)))
+                            (setq cont (+ cont 1))
+                        )
+                        (setq i (+ i 1))
+                        (when (= i (TournamentBox-numRegisterBoxers tournament))(return))
+                    )
+                    (format t "La cantidad de boxeadores mosca en el torneo con codigo ~D es: ~D~%" codeTournament cont)
+                )
+             )
+        )
+    )       
+)
