@@ -48,9 +48,9 @@
     (print "Ingrese los datos del boxeador")        
     (setq codeBox (readBoxerCode))
     (print "Nombre del boxeador: ")
-    (setq nameBox (read))
+    (setq nameBox (read-line))
     (print "Apellido del boxeador: ")
-    (setq lastnameBox (read))        
+    (setq lastnameBox (read-line))        
     (setq typeWeightBox (readTypeWeightBoxer "Tipo de peso del boxeador: "))     
     (let 
         ((boxer (make-Boxer :code codeBox :firstname nameBox :lastname lastnameBox :typeWeight typeWeightBox)))                

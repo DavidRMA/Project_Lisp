@@ -38,7 +38,7 @@
             (setf (TournamentBox-code tournament) code)
 
             (print "Nombre del torneo de boxeo:")
-            (setq nameTor (read))
+            (setq nameTor (read-line))
             (setf (TournamentBox-name tournament) nameTor)
 
             (setq mode (readModalityTournament "Modalidad del torneo de boxeo:"))
@@ -93,7 +93,7 @@
 ;Funcion para buscar un boxeador de un torneo especifico
 (defun searchBoxerByTournament()
     (printTournaments)    
-    (setq codeTournament (readNumber "Ingrese el codigo del torneo al que desea buscar el boxeador:"))
+    (setq codeTournament (readNumber "Ingrese el codigo del torneo del que se desea buscar el boxeador:"))
     (setq indexTournament (findTournament codeTournament))
     (if (= indexTournament -1)
         (print "El torneo no existe")
@@ -106,7 +106,7 @@
                 (progn
                     (printBoxersByTournament tournament)                    
                     (setq codeBoxer (readNumber "Ingrese el codigo del boxeador que desea buscar:"))
-                    (setq indexBoxer (findBoxer codeBoxer tournament))
+                    (setq indexBoxer (searchBoxer codeBoxer tournament))
                     (if (= indexBoxer -1)
                         (print "El boxeador no existe en este torneo")
                         (progn
@@ -131,7 +131,7 @@
     )
 )
 ;Funcion para buscar un boxeador a partir de su codigo y un torneo de box
-(defun findBoxer(codeBoxer tournament)
+(defun searchBoxer(codeBoxer tournament)
     (setq index -1)
     (setq i 0)
     (loop 
