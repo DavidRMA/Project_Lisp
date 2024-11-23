@@ -3,11 +3,11 @@
 ;Jonathan Guejia Burbano <jonathanguejia@unicauca.edu.co>
 
 ;Archivos a cargar
-
 (load "tournament.lsp")
 (load "boxer.lsp")
 (load "validations.lsp")
 
+;Menu de opciones
 (loop
       
 	(print " ===========================================")
