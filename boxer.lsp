@@ -1,12 +1,14 @@
 ;Integrantes:
 ;David Chacón Morán <jhoanchacon@unicauca.edu.co>
 ;Jonathan Guejia Burbano <jonathanguejia@unicauca.edu.co>
+;Archivo que define la estructura, instancia y las funciones relacionadas a los boxeadores
 
+;Estructura boxeador
 (defstruct Boxer
-    code
-    firstname
-    lastname
-    typeWeight
+    code        ;Codigo boxeador
+    firstname   ;Nombre boxeador
+    lastname    ;Apellido boxeador
+    typeWeight  ;Tipo de peso boxeador
 )
 ;Instanciacion de un boxeador
 (defun createBoxer()
@@ -16,6 +18,7 @@
         box
     )
 )
+;Funcion para registrar un boxeador
 (defun registerBoxer()
     (printTournaments)    
     (setq codeTournament (readNumber "Ingrese el codigo del torneo al que desea registrar el boxeador:"))    
@@ -40,25 +43,28 @@
         )
     )
 )
+;Funcion para ingresar los datos de un boxeador
 (defun readBoxer()
     (print "Ingrese los datos del boxeador")        
     (setq codeBox (readBoxerCode))
     (print "Nombre del boxeador: ")
-    (setq nameBox (read))
+    (setq nameBox (read-line))
     (print "Apellido del boxeador: ")
-    (setq lastnameBox (read))        
+    (setq lastnameBox (read-line))        
     (setq typeWeightBox (readTypeWeightBoxer "Tipo de peso del boxeador: "))     
     (let 
         ((boxer (make-Boxer :code codeBox :firstname nameBox :lastname lastnameBox :typeWeight typeWeightBox)))                
         boxer
     )    
 )
+;Funcion para imprimir un boxeador
 (defun printBoxer (boxer)
     (format t "~%Codigo: ~D" (Boxer-code boxer))
     (format t "~%Nombre: ~A" (Boxer-firstname boxer))
     (format t "~%Apellido: ~A" (Boxer-lastname boxer))
     (format t "~%Tipo de peso: ~A" (Boxer-typeWeight boxer))
 )
+;Funcion para validar si ya existe el codigo de un boxeador
 (defun readBoxerCode()
     (loop
         (let
@@ -68,6 +74,7 @@
         (print "El boxeador ya existe, intente con otro codigo")
     )    
 )
+;Funcion para buscar un boxeador por su codigo
 (defun findBoxer(code)
     (setq index -1)
     ;Si no existen boxeadores registrados en el torneo, se retorna -1

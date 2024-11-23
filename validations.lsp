@@ -2,7 +2,7 @@
 ;David Chacón Morán <jhoanchacon@unicauca.edu.co>
 ;Jonathan Guejia Burbano <jonathanguejia@unicauca.edu.co>
 
-;Funciones de validacion
+;Archivo que define funciones de validacion
 
 ;Funcion para leer un numero entero positivo
 (defun readNumber(mensaje)
@@ -16,6 +16,7 @@
         (print "Debe ingresar un numero entero positivo")
     )        
 )
+;Funcion para validar el tipo de peso de un boxeador
 (defun readTypeWeightBoxer(mensaje)
     (loop
         (print mensaje)
@@ -26,6 +27,7 @@
         (print "El tipo de peso debe ser MOSCA o PLUMA")
     )        
 )
+;Funcion para validar la modalidad  de un torneo de box
 (defun readModalityTournament(mensaje)
     (loop
         (print mensaje)
